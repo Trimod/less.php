@@ -61,14 +61,8 @@ class Less_Visitor_joinSelector extends Less_Visitor{
     public function visitMedia($mediaNode) {
 		$context = end($this->contexts); //$context = $this->contexts[ count($this->contexts) - 1];
 
-		$mediaNode->rules[0]->root =( !count($context) || (is_object($context[0]) && $context[0]->multiMedia) );
-	}
-	
-	public function visitDirective($directive) {
-		$context = end($this->contexts); //$context = $this->contexts[ count($this->contexts) - 1];
-
-		if ( $directive->rules ){
-			$directive->rules[0]->root = count($context) ? false : true;
+		if( !count($context) || (is_object($context[0]) && $context[0]->multiMedia) ){
+			$mediaNode->rules[0]->root = true;
 		}
 	}
 
